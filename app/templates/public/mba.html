@@ -1,0 +1,30 @@
+{% extends 'public/base.html' %}
+{% block title %}MBA - ISIM{% endblock %}
+{% block content %}
+<div class="py-5" style="background: linear-gradient(135deg, #1a3c6e, #2d6a9f); color: white;">
+    <div class="container"><h1 class="section-title text-white">MBA Program</h1><p class="opacity-75">Master of Business Administration</p></div>
+</div>
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-8">
+            <h3 class="section-title mb-3">About the Program</h3>
+            <p>The MBA program at ISIM is a 2-year full-time postgraduate program affiliated with Rajasthan Technical University. It is designed to develop future business leaders with the right blend of theory and practical exposure.</p>
+            <h5 class="mt-4 mb-3">Specializations</h5>
+            <div class="row g-3">
+                {% for spec in ['Marketing Management','Financial Management','Human Resource Management','Operations Management','Information Technology'] %}
+                <div class="col-md-6"><div class="p-3 border rounded-3 d-flex align-items-center gap-2"><i class="fas fa-check-circle text-success"></i> {{ spec }}</div></div>
+                {% endfor %}
+            </div>
+            <h5 class="mt-4 mb-3">Eligibility</h5>
+            <p>Graduate in any discipline with minimum 50% marks. Admission through MAT/CAT/CMAT/RTU entrance exam.</p>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow p-4">
+                <h5 class="fw-bold mb-3">Program Highlights</h5>
+                <ul class="list-unstyled"><li class="mb-2"><i class="fas fa-clock me-2 text-primary"></i>Duration: 2 Years</li><li class="mb-2"><i class="fas fa-book me-2 text-primary"></i>4 Semesters</li><li class="mb-2"><i class="fas fa-users me-2 text-primary"></i>60 Seats</li><li class="mb-2"><i class="fas fa-award me-2 text-primary"></i>RTU Affiliated</li></ul>
+                <a href="{{ url_for('public.admission') }}" class="btn btn-primary w-100 mt-3">Apply Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

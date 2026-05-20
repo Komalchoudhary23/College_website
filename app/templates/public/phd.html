@@ -1,0 +1,11 @@
+{% extends 'public/base.html' %}
+{% block title %}PhD - ISIM{% endblock %}
+{% block content %}
+<div class="py-5" style="background: linear-gradient(135deg, #1a3c6e, #2d6a9f); color: white;">
+    <div class="container"><h1 class="section-title text-white">PhD Program</h1><p class="opacity-75">Doctoral Research at ISIM</p></div>
+</div>
+<div class="container py-5">
+    <p>ISIM offers PhD programs in Management and Computer Science in affiliation with Rajasthan Technical University. Research scholars work under experienced faculty guides on industry-relevant topics.</p>
+    <a href="{{ url_for('public.contact') }}" class="btn btn-primary mt-3">Contact for PhD Inquiries</a>
+</div>
+{% endblock %}

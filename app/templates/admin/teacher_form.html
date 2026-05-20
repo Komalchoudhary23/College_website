@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+{% block title %}{{ 'Edit' if item else 'Add' }} Teacher - ISIM Admin{% endblock %}
+{% block page_title %}{{ 'Edit' if item else 'Add' }} Teacher{% endblock %}
+{% block content %}
+<div class="card content-card">
+    <div class="card-body p-4">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Full Name *</label>
+                    <input type="text" name="name" class="form-control" value="{{ item.name if item else '' }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Designation</label>
+                    <input type="text" name="designation" class="form-control" value="{{ item.designation if item else '' }}" placeholder="e.g. Assistant Professor">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Department</label>
+                    <select name="department" class="form-select">
+                        <option value="">Select</option>
+                        {% for d in ['MBA', 'MCA', 'PhD', 'General'] %}
+                        <option value="{{ d }}" {{ 'selected' if item and item.department == d }}>{{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ item.email if item else '' }}">
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Qualification</label>
+                    <input type="text" name="qualification" class="form-control" value="{{ item.qualification if item else '' }}" placeholder="e.g. Ph.D, M.Tech">
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Photo</label>
+                    <input type="file" name="photo" class="form-control" accept="image/*">
+                </div>
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-success">{{ 'Update' if item else 'Add' }} Teacher</button>
+                    <a href="{{ url_for('admin.teacher_list') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

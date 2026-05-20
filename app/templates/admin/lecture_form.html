@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %}
+{% block title %}Add Lecture - ISIM Admin{% endblock %}
+{% block page_title %}Add Lecture{% endblock %}
+{% block content %}
+<div class="card content-card">
+    <div class="card-body p-4">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Title *</label>
+                    <input type="text" name="title" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Subject</label>
+                    <input type="text" name="subject" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Teacher</label>
+                    <select name="teacher_id" class="form-select">
+                        <option value="">None</option>
+                        {% for t in teachers %}<option value="{{ t.id }}">{{ t.name }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">File (PDF/PPT)</label>
+                    <input type="file" name="file" class="form-control">
+                </div>
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-success">Add Lecture</button>
+                    <a href="{{ url_for('admin.lecture_list') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

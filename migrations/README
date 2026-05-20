@@ -1,0 +1,4 @@
+# This file is required for Flask-Migrate
+# Run: flask db init (first time only)
+#      flask db migrate -m "initial"
+#      flask db upgrade

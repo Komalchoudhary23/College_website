@@ -1,0 +1,65 @@
+{% extends 'public/base.html' %}
+{% block title %}Admission - ISIM{% endblock %}
+
+{% block content %}
+<div class="py-5" style="background: linear-gradient(135deg, #1a3c6e, #2d6a9f); color: white;">
+    <div class="container">
+        <h1 class="section-title text-white">Apply for Admission</h1>
+        <p class="opacity-75">Fill out the form below and our team will get back to you.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <h4 class="mb-4" style="color: #1a3c6e;">Admission Request Form</h4>
+                    <form method="POST" action="">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Full Name *</label>
+                                <input type="text" name="name" class="form-control" required placeholder="Your full name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Email Address *</label>
+                                <input type="email" name="email" class="form-control" required placeholder="your@email.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Contact Number</label>
+                                <input type="tel" name="contact" class="form-control" placeholder="+91-XXXXXXXXXX">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Program *</label>
+                                <select name="course" class="form-select" required>
+                                    <option value="">Select Program</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="Your address">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Highest Qualification</label>
+                                <input type="text" name="qualification" class="form-control" placeholder="e.g. B.Tech, BCA, B.Com">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Message</label>
+                                <textarea name="message" class="form-control" rows="4" placeholder="Any additional information..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Application
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %}
+{% block title %}Messages - ISIM Admin{% endblock %}
+{% block page_title %}Contact Messages{% endblock %}
+{% block content %}
+<div class="card content-card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light"><tr><th>#</th><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for m in items %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-semibold">{{ m.name }}</td>
+                        <td>{{ m.email }}</td>
+                        <td>{{ m.subject or '-' }}</td>
+                        <td class="text-muted small">{{ (m.message or '')[:60] }}...</td>
+                        <td class="text-muted small">{{ m.created_at.strftime('%d %b %Y') }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('admin.delete_message', item_id=m.id) }}" onsubmit="return confirm('Delete?')">
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7" class="text-center text-muted py-5">No messages yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

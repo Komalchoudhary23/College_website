@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %}
+{% block title %}Lectures - ISIM Admin{% endblock %}
+{% block page_title %}Lecture Management{% endblock %}
+{% block content %}
+<div class="mb-3"><a href="{{ url_for('admin.add_lecture') }}" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Add Lecture</a></div>
+<div class="card content-card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light"><tr><th>#</th><th>Title</th><th>Subject</th><th>Teacher</th><th>Date</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for l in items %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-semibold">{{ l.title }}</td>
+                        <td>{{ l.subject or '-' }}</td>
+                        <td>{{ l.teacher.name if l.teacher else '-' }}</td>
+                        <td class="text-muted small">{{ l.created_at.strftime('%d %b %Y') }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('admin.delete_lecture', item_id=l.id) }}" onsubmit="return confirm('Delete?')">
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="text-center text-muted py-5">No lectures added yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

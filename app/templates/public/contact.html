@@ -1,0 +1,50 @@
+{% extends 'public/base.html' %}
+{% block title %}Contact - ISIM{% endblock %}
+
+{% block content %}
+<div class="py-5" style="background: linear-gradient(135deg, #1a3c6e, #2d6a9f); color: white;">
+    <div class="container">
+        <h1 class="section-title text-white">Contact Us</h1>
+        <p class="opacity-75">We'd love to hear from you.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-5">
+            <h4 style="color:#1a3c6e;" class="mb-4">Get in Touch</h4>
+            <div class="d-flex mb-3"><i class="fas fa-map-marker-alt fa-lg me-3 mt-1" style="color:#e8a020;"></i><div><strong>Address</strong><br>Jaipur, Rajasthan, India</div></div>
+            <div class="d-flex mb-3"><i class="fas fa-phone fa-lg me-3 mt-1" style="color:#e8a020;"></i><div><strong>Phone</strong><br>+91-XXXXXXXXXX</div></div>
+            <div class="d-flex mb-3"><i class="fas fa-envelope fa-lg me-3 mt-1" style="color:#e8a020;"></i><div><strong>Email</strong><br>info@isim.ac.in</div></div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-body p-4">
+                    <form method="POST">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" class="form-control" rows="5" placeholder="Your message..." required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary fw-bold">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

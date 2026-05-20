@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: isim_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-isim_website}
+      MYSQL_USER: ${MYSQL_USER:-isim_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-isim_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"   # expose for local dev tools (e.g. TablePlus, DBeaver)
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root_password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    container_name: isim_web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      FLASK_APP: run.py
+      FLASK_ENV: ${FLASK_ENV:-production}
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-isim_website}
+      MYSQL_USER: ${MYSQL_USER:-isim_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-isim_password}
+      DATABASE_URL: mysql://${MYSQL_USER:-isim_user}:${MYSQL_PASSWORD:-isim_password}@db:3306/${MYSQL_DATABASE:-isim_website}
+    volumes:
+      - uploads_data:/app/app/static/uploads
+    ports:
+      - "5000:5000"
+
+volumes:
+  mysql_data:
+    driver: local
+  uploads_data:
+    driver: local

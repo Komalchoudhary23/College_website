@@ -1,0 +1,32 @@
+{% extends 'public/base.html' %}
+{% block title %}Faculty - ISIM{% endblock %}
+{% block content %}
+<div class="py-5" style="background: linear-gradient(135deg, #1a3c6e, #2d6a9f); color: white;">
+    <div class="container"><h1 class="section-title text-white">Our Faculty</h1></div>
+</div>
+<div class="container py-5">
+    {% if teachers %}
+    <div class="row g-4">
+        {% for t in teachers %}
+        <div class="col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm text-center p-3 h-100">
+                {% if t.photo %}
+                <img src="{{ url_for('static', filename=t.photo) }}" class="rounded-circle mx-auto mb-3" style="width:80px;height:80px;object-fit:cover;" alt="{{ t.name }}">
+                {% else %}
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width:80px;height:80px;">
+                    <i class="fas fa-user fa-2x text-secondary"></i>
+                </div>
+                {% endif %}
+                <h6 class="fw-bold mb-1">{{ t.name }}</h6>
+                <p class="text-muted small mb-1">{{ t.designation or '' }}</p>
+                <span class="badge bg-light text-primary border">{{ t.department or '' }}</span>
+                {% if t.qualification %}<p class="text-muted small mt-2 mb-0">{{ t.qualification }}</p>{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted"><i class="fas fa-users fa-3x mb-3 d-block"></i>Faculty information will be added soon.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'public/base.html' %}
+{% block title %}ISIM - Welcome{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero { background: linear-gradient(135deg, #1a3c6e 0%, #2d6a9f 100%); min-height: 90vh; display: flex; align-items: center; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; }
+    .stat-card { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
+    .stat-card:hover { transform: translateY(-5px); }
+    .stat-number { font-size: 2.5rem; font-weight: 700; color: #1a3c6e; }
+    .course-card { border-radius: 16px; overflow: hidden; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
+    .course-card:hover { transform: translateY(-8px); }
+    .news-card { border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero text-white">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h5 class="mb-3" style="color: #e8a020; letter-spacing: 2px; text-transform: uppercase;">Welcome to ISIM</h5>
+                <h1 class="mb-4">Education is the Best Key to Success in Life</h1>
+                <p class="lead mb-4 opacity-75">A pioneer in Management and IT education with over 25 years of excellence. Ranked among top institutions by Rajasthan Technical University, accredited 'A' by NAAC.</p>
+                <a href="{{ url_for('public.about') }}" class="btn btn-warning btn-lg me-3 fw-bold">Discover More</a>
+                <a href="{{ url_for('public.admission') }}" class="btn btn-outline-light btn-lg">Apply Now</a>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block text-center">
+                <i class="fas fa-university" style="font-size: 12rem; opacity: 0.15;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="py-5" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="card stat-card p-4">
+                    <div class="stat-number">25+</div>
+                    <div class="text-muted">Years of Experience</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card stat-card p-4">
+                    <div class="stat-number">5000+</div>
+                    <div class="text-muted">Alumni Network</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card stat-card p-4">
+                    <div class="stat-number">A</div>
+                    <div class="text-muted">NAAC Grade</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card stat-card p-4">
+                    <div class="stat-number">100+</div>
+                    <div class="text-muted">Recruiters</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Courses -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Our Programs</h2>
+            <p class="text-muted">Industry-relevant, future-ready academic programs</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card course-card h-100">
+                    <div class="card-body p-4" style="border-top: 4px solid #1a3c6e;">
+                        <div class="mb-3"><i class="fas fa-briefcase fa-2x" style="color: #1a3c6e;"></i></div>
+                        <h4>MBA</h4>
+                        <p class="text-muted">Master of Business Administration — 2 year program with specializations in Marketing, Finance, HR and more.</p>
+                        <a href="{{ url_for('public.mba') }}" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card h-100">
+                    <div class="card-body p-4" style="border-top: 4px solid #e8a020;">
+                        <div class="mb-3"><i class="fas fa-laptop-code fa-2x" style="color: #e8a020;"></i></div>
+                        <h4>MCA</h4>
+                        <p class="text-muted">Master of Computer Applications — 2 year program focusing on software development, AI, and computing.</p>
+                        <a href="{{ url_for('public.mca') }}" class="btn btn-outline-warning">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card h-100">
+                    <div class="card-body p-4" style="border-top: 4px solid #28a745;">
+                        <div class="mb-3"><i class="fas fa-flask fa-2x" style="color: #28a745;"></i></div>
+                        <h4>PhD</h4>
+                        <p class="text-muted">Doctoral research programs in Management and Computer Science under RTU affiliation.</p>
+                        <a href="{{ url_for('public.phd') }}" class="btn btn-outline-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest News -->
+{% if latest_news %}
+<section class="py-5" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Latest News & Activities</h2>
+        </div>
+        <div class="row g-4">
+            {% for item in latest_news %}
+            <div class="col-md-4">
+                <div class="card news-card h-100">
+                    {% if item.get_images() %}
+                    <img src="{{ url_for('static', filename=item.get_images()[0]) }}" class="card-img-top" style="height:200px;object-fit:cover;" alt="{{ item.title }}">
+                    {% else %}
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height:200px; background: linear-gradient(135deg, #1a3c6e, #2d6a9f);">
+                        <i class="fas fa-newspaper fa-3x text-white opacity-50"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <span class="badge-activity mb-2 d-inline-block">{{ item.activity_name or 'General' }}</span>
+                        <h6 class="fw-bold mt-1">{{ item.title }}</h6>
+                        <p class="text-muted small">{{ (item.description or '')[:100] }}{% if item.description and item.description|length > 100 %}...{% endif %}</p>
+                        <a href="{{ url_for('public.news_detail', news_id=item.id) }}" class="btn btn-sm btn-primary">Read More</a>
+                    </div>
+                    <div class="card-footer text-muted small">{{ item.created_at.strftime('%d %b %Y') }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('public.news') }}" class="btn btn-outline-primary">View All News</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="py-5 text-white text-center" style="background: linear-gradient(135deg, #1a3c6e, #e8a020);">
+    <div class="container">
+        <h2 class="section-title text-white mb-3">Start Your Journey at ISIM</h2>
+        <p class="lead mb-4 opacity-90">Join thousands of successful alumni who built their careers here.</p>
+        <a href="{{ url_for('public.admission') }}" class="btn btn-light btn-lg fw-bold px-5">Apply for Admission</a>
+    </div>
+</section>
+{% endblock %}
